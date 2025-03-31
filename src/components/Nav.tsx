@@ -3,23 +3,12 @@ import { NavLink } from "react-router";
 import "./index.css";
 
 const Nav = () => {
-  return (
-    <div className="bg-white rounded-t-xl flex justify-evenly items-end  pt-3 ">
-      {/* show only this route to the student. */}
-      <NavLink
-        className={`${({ isActive }: { isActive: boolean }) =>
-          isActive ? "active" : ""} flex items-center flex-col `}
-        to={"/leader-board"}
-      >
-        <div className="icon border p-2 rounded-full">
-          <Trophy height={22} width={22} />
-        </div>
-        <span className="text-sm font-thin">Leaderboard</span>
-      </NavLink>
 
-      {/* show only to the teacher. */}
 
-      <NavLink
+
+    const teacherRoutes=<>
+    
+    <NavLink
         className={`${({ isActive }: { isActive: boolean }) =>
           isActive ? "active" : ""} flex items-center flex-col `}
         to={"/student"}
@@ -44,13 +33,36 @@ const Nav = () => {
       <NavLink
         className={`${({ isActive }: { isActive: boolean }) =>
           isActive ? "active" : ""} flex items-center flex-col `}
-        to={"/question"}
+        to={"/exam"}
       >
         <div className="icon border p-2 rounded-full">
           <FlaskConical height={22} width={22} />
         </div>
         <span className="text-sm font-thin">Exam</span>
       </NavLink>
+    </>
+
+ 
+
+  return (
+    <div className="bg-white rounded-t-xl flex justify-evenly items-end  pt-3 ">
+      {/* show only this route to the student. */}
+      <NavLink
+        className={`${({ isActive }: { isActive: boolean }) =>
+          isActive ? "active" : ""} flex items-center flex-col `}
+        to={"/leader-board"}
+      >
+        <div className="icon border p-2 rounded-full">
+          <Trophy height={22} width={22} />
+        </div>
+        <span className="text-sm font-thin">Leaderboard</span>
+      </NavLink>
+
+      {/* show only to the teacher. */}
+{
+    localStorage.getItem("role")==="teacher"&&teacherRoutes
+}
+      
     </div>
   );
 };
