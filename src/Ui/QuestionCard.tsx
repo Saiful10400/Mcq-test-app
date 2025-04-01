@@ -1,27 +1,46 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { tSingleQuestion } from "../pages/Question";
+import { appContext } from "../contextApi/context";
 
 const QuestionCard = ({
   data,
   index,
-  fn
+  
 }: {
   index: number;
   data: tSingleQuestion;
-  fn:React.Dispatch<React.SetStateAction<{index:number,ans:string}[]>>
 }) => {
   const options = ["A", "B", "C", "D"];
 
   // selected option text.
   const [selectedAns, setSelectedAns] = useState<string | null>(null);
+  const context=useContext(appContext)
 
   const ansSelecteHandle=(arg:string)=>{
     setSelectedAns(arg)
-    fn(p=>{
-        if(p.find(item=>item.index===index-1)){
+    context?.setExam(p=>{
+        if(p.selectedAns.find(item=>item.index===index-1)){
+       
+          
+          if(p.selectedAns.find(item=>item.ans===arg)){
             return p
+          } else{
+            return ({...p,selectedAns:[...(p.selectedAns.filter(item=>item.index!==index-1)),{index:index-1,ans:arg}]})
+          }
+
+
+
+          
+          // if(p.selectedAns.find(item=>item.ans===arg)){
+          //   return p
+          // } else{
+          //   return ({...p,selectedAns:p.selectedAns.filter(item=>item.index!==index-1).push({index:index,ans:arg})})
+          // }
+
+
+
         } else{
-           return ([...p,{ans:arg,index:index-1}])
+           return ({...p,selectedAns:[...p.selectedAns,{ans:arg,index:index-1}]})
         }
     })
   }

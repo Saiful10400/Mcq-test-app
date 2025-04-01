@@ -9,7 +9,7 @@ const ExamStartConfirmation = ({ data }: { data: tExam | null }) => {
 
   const startExamHandle = () => {
     if(data?.time)
-    context?.setExam((p: tStarExamContext) => ({ ...p, start: true,examDuration:data?.time }));
+    context?.setExam((p: tStarExamContext) => ({ ...p, start: true,examDuration:data?.time,totalQuestion:data?.questionPapper?.questions?.length,examSlug:data?.slug}));
   };
  
   return (

@@ -1,14 +1,14 @@
 import { FlaskConical, ScrollText, Trophy, User } from "lucide-react";
 import { NavLink } from "react-router";
 import "./index.css";
+import { useContext, useEffect, useState } from "react";
+import { appContext } from "../contextApi/context";
+import timeFormate from "../utils/timeFormate";
 
 const Nav = () => {
-
-
-
-    const teacherRoutes=<>
-    
-    <NavLink
+  const teacherRoutes = (
+    <>
+      <NavLink
         className={`${({ isActive }: { isActive: boolean }) =>
           isActive ? "active" : ""} flex items-center flex-col `}
         to={"/student"}
@@ -41,8 +41,53 @@ const Nav = () => {
         <span className="text-sm font-thin">Exam</span>
       </NavLink>
     </>
+  );
 
- 
+  const context = useContext(appContext);
+
+  // timer.
+  const [timeLeft, setTimeLeft] = useState<null | number>(null);
+
+  useEffect(() => {
+    if (context?.exam.examDuration) setTimeLeft(context.exam.examDuration * 60);
+  }, [context?.exam.examDuration]);
+
+  useEffect(() => {
+    if (timeLeft === null) return;
+
+    if (timeLeft <= 0) {
+      context?.setExam((p) => ({ ...p, timeOut: true }));
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev as number) - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft,context]);
+
+  // ui.
+
+  if (context?.exam.start) {
+    return (
+      <div className="bg-white rounded-t-xl flex justify-between px-3 items-end  pt-3 fixed bottom-0 left-0 w-full">
+        <h1 className="text-base font-semibold">
+          Time remaining: <span>{timeFormate(timeLeft as number)}</span>
+        </h1>
+        <h1 className="text-base font-semibold">
+          Question remaining:{" "}
+          <span>
+            {context?.exam?.totalQuestion
+              ? context?.exam?.totalQuestion - context.exam?.selectedAns?.length
+              : 0}
+          </span>
+        </h1>
+      </div>
+    );
+  }
+
+  //
 
   return (
     <div className="bg-white rounded-t-xl flex justify-evenly items-end  pt-3 ">
@@ -59,10 +104,7 @@ const Nav = () => {
       </NavLink>
 
       {/* show only to the teacher. */}
-{
-    localStorage.getItem("role")==="teacher"&&teacherRoutes
-}
-      
+      {localStorage.getItem("role") === "teacher" && teacherRoutes}
     </div>
   );
 };

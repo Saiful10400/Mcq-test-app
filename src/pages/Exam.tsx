@@ -17,6 +17,7 @@ export type tStudent = {
 
 export type tExam = {
   slug: string;
+  hasTaken: boolean;
   student: tStudent;
   questionPapper: tQuestion;
   result: string;
@@ -103,7 +104,8 @@ const Exam = () => {
 
             {allQuestion?.map((item: tQuestion) => (
               <option value={item._id}>
-                {item.name}(s-{item.subject})(c-{item.class})(tq-{item.questions.length})
+                {item.name}(s-{item.subject})(c-{item.class})(tq-
+                {item.questions.length})
               </option>
             ))}
           </select>
