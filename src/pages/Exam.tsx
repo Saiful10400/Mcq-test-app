@@ -15,7 +15,7 @@ export type tStudent = {
   __v: number;
 };
 
-type tExam = {
+export type tExam = {
   slug: string;
   student: tStudent;
   questionPapper: tQuestion;
@@ -88,7 +88,7 @@ const Exam = () => {
 
             {allStudent?.map((item: tStudent) => (
               <option value={item._id}>
-                {item.name}({item.class})
+                {item.name}(c-{item.class})
               </option>
             ))}
           </select>
@@ -103,7 +103,7 @@ const Exam = () => {
 
             {allQuestion?.map((item: tQuestion) => (
               <option value={item._id}>
-                {item.name}({item.subject})({item.class})
+                {item.name}(s-{item.subject})(c-{item.class})(tq-{item.questions.length})
               </option>
             ))}
           </select>
@@ -134,7 +134,7 @@ const Exam = () => {
               const linkCopyHandle = async () => {
                 try {
                   await navigator.clipboard.writeText(
-                    `http://localhost:5173/exam/${item.slug}`
+                    `http://localhost:5173/${item.slug}`
                   );
                   alert("Link copyed");
                 } catch (err) {
