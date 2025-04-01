@@ -17,7 +17,7 @@ const routes = createBrowserRouter([
         path: "/:slug",
         element: <ExamStarter />,
         loader:async({params})=>{
-          const data=await axios.get(`http://localhost:8000/api/exam/${params.slug}`)
+          const data=await axios.get(`https://mcq-test-server.vercel.app/api/exam/${params.slug}`)
           return data?.data?.data
         }
       },

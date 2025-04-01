@@ -18,7 +18,7 @@ const Student = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/auth")
+      .get("https://mcq-test-server.vercel.app/api/auth")
       .then((res) => setAllStudent(res.data?.data));
   }, [refetch]);
 
@@ -29,7 +29,7 @@ const Student = () => {
   const Class = (form.elements.namedItem("class") as HTMLInputElement)?.value;
   const gender = (form.elements.namedItem("gender") as HTMLInputElement)?.value;
 
-axios.post("http://localhost:8000/api/auth/create-student",{name,class:Number(Class),gender}).then(res=>{
+axios.post("https://mcq-test-server.vercel.app/api/auth/create-student",{name,class:Number(Class),gender}).then(res=>{
   if(res.data?.statusCode===200){
     alert("New student created.")
     setRefetch(p=>!p)

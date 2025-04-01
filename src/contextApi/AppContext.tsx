@@ -17,7 +17,7 @@ const[exam,setExam]=useState<tStarExamContext>({start:false,examDuration:null,se
 
 // submit exam papper.
 const examSubmitHandle=()=>{
-axios.post("http://localhost:8000/api/result/create",{examSlug:exam.examSlug,selectedAns:exam.selectedAns})
+axios.post("https://mcq-test-server.vercel.app/api/result/create",{examSlug:exam.examSlug,selectedAns:exam.selectedAns})
 .then(res=>{
   if(res.data?.statusCode===200){
     window.location.reload()

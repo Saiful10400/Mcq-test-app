@@ -30,7 +30,7 @@ const Question = () => {
  
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/question-papper/all-questionPappers")
+      .get("https://mcq-test-server.vercel.app/api/question-papper/all-questionPappers")
       .then((res) => setAllQuestion(res.data?.data));
   }, [refetch]);
  
@@ -71,7 +71,7 @@ const Question = () => {
      const questions=JSON.parse((form.elements.namedItem("questions") as HTMLInputElement)?.value)
 
     axios
-      .post("http://localhost:8000/api/question-papper/create-one", {
+      .post("https://mcq-test-server.vercel.app/api/question-papper/create-one", {
         name,
         class: Number(Class),
         subject,

@@ -33,13 +33,13 @@ const Exam = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/auth")
+      .get("https://mcq-test-server.vercel.app/api/auth")
       .then((res) => setAllStudent(res.data?.data));
     axios
-      .get("http://localhost:8000/api/question-papper/all-questionPappers")
+      .get("https://mcq-test-server.vercel.app/api/question-papper/all-questionPappers")
       .then((res) => setAllQuestion(res.data?.data));
     axios
-      .get("http://localhost:8000/api/exam")
+      .get("https://mcq-test-server.vercel.app/api/exam")
       .then((res) => setAllExam(res.data?.data));
   }, [refetch]);
 
@@ -54,7 +54,7 @@ const Exam = () => {
     const time = (form.elements.namedItem("time") as HTMLInputElement)?.value;
 
     axios
-      .post("http://localhost:8000/api/exam/create-one", {
+      .post("https://mcq-test-server.vercel.app/api/exam/create-one", {
         student,
         time: Number(time),
         questionPapper,
@@ -136,7 +136,7 @@ const Exam = () => {
               const linkCopyHandle = async () => {
                 try {
                   await navigator.clipboard.writeText(
-                    `http://localhost:5173/${item.slug}`
+                    `https://saiful-10400-mcq-test-app.vercel.app/${item.slug}`
                   );
                   alert("Link copyed");
                 } catch (err) {
