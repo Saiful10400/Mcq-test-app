@@ -21,8 +21,8 @@ move("/")
     <div className=" p-4">
       <h1>Teacher mode:</h1>
       <div className="flex items-center justify-start gap-2 ml-3 mt-3">
-        <Button fn={makeTeacher} type="primary" text="turn on" />
-        <Button fn={removeTeacher} type="secondary" text="turn off" />
+        <Button active={true} fn={makeTeacher} type="primary" text="turn on" />
+        <Button active={true} fn={removeTeacher} type="secondary" text="turn off" />
       </div>
     </div>
   );

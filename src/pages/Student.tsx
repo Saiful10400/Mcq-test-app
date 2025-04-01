@@ -57,7 +57,7 @@ axios.post("http://localhost:8000/api/auth/create-student",{name,class:Number(Cl
             <option value="female">Female</option>
           </select>
 
-          <Button text="Create" type="primary" />
+          <Button active={true} text="Create" type="primary" />
         </div>
       </form>
 
