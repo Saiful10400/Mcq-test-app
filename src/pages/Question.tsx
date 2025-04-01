@@ -4,7 +4,7 @@ import axios from "axios";
 import * as z from "zod";
 
 
-type Question = {
+export type tSingleQuestion = {
     _id: string;
     question: string;
     options: string[];
@@ -17,7 +17,7 @@ type Question = {
     name: string;
     class: number;
     subject: string;
-    questions: Question[];
+    questions: tSingleQuestion[];
     createdAt: string; // ISO Date string
     updatedAt: string; // ISO Date string
     __v: number;
