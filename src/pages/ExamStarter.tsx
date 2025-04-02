@@ -31,7 +31,7 @@ const ExamStarter = () => {
   const context = useContext(appContext);
 
   const data = useLoaderData<null | Partial<tExamResult & tExam>>();
-  console.log(data);
+ 
   if (data?.exam?.hasTaken) {
     return <AfterExamResult data={data as tExamResult} />;
   } else if (context?.exam.start && !data?.hasTaken) {

@@ -1,7 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { tExam } from "../pages/Exam";
 import { tSingleQuestion } from "../pages/Question";
- 
 
 import QuestionCard from "../Ui/QuestionCard";
 import { appContext } from "../contextApi/context";
@@ -28,9 +27,23 @@ const Exampapper = ({ data }: { data: tExam }) => {
     };
   }, [context]);
 
+  const [submitDisable, setSubmitDisable] = useState<boolean>(false);
+
   if (context?.exam.timeOut) {
     return <TimeOutGif />;
   } else {
+    const buttonSubmithandle = () => {
+      let timerId: ReturnType<typeof setTimeout>;
+
+      return () => {
+        if (timerId) clearTimeout(timerId);
+        timerId = setTimeout(() => {
+          setSubmitDisable(true);
+          context?.examSubmitHandle();
+        }, 800);
+      };
+    };
+
     return (
       <div className="flex flex-col gap-2 px-2">
         {data?.questionPapper?.questions?.map(
@@ -39,8 +52,13 @@ const Exampapper = ({ data }: { data: tExam }) => {
           )
         )}
 
-<button disabled  onClick={()=>context?.examSubmitHandle()} className="bg-[#f66b30] text-white font-semibold rounded-md text-xl py-2 px-2">{"জমা দাও"}</button>
- 
+        <button
+          disabled={submitDisable}
+          onClick={buttonSubmithandle()}
+          className="bg-[#f66b30] text-white font-semibold rounded-md text-xl py-2 px-2"
+        >
+          {submitDisable ? "একটু অপেক্ষা করো" : "জমা দাও"}
+        </button>
       </div>
     );
   }

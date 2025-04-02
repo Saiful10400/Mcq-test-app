@@ -35,7 +35,7 @@ if(data.length==0){
 }
 
 
-console.log(data.length)
+ 
 
 
   return (

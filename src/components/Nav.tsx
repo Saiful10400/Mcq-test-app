@@ -56,7 +56,7 @@ const Nav = () => {
     if (timeLeft === null) return;
 
     if (timeLeft <= 0) {
-      console.log("you are right.");
+      
       context?.setExam((p) => ({ ...p, timeOut: true }));
       return;
     }
