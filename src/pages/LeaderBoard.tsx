@@ -35,7 +35,7 @@ if(data.length==0){
 }
 
 
-
+console.log(data.length)
 
 
   return (
@@ -50,7 +50,7 @@ if(data.length==0){
 
         <div className="mt-[190px] flex justify-center scale-95 gap-5">
           {/* 2 */}
-          {data.length <= 2 && (
+          {data.length >= 2 && (
             <div className="flex flex-col justify-center items-center relative">
               <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
                 <span className="text-white font-semibold italic text-2xl">
