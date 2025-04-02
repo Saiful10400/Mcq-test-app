@@ -63,7 +63,7 @@ if(data.length==0){
                 alt=""
               />
               <h1 className="text-white text-center font-normal text-lg mt-2">
-                {data[1].student.name}
+                {data[1].student.name.split(" ")[0]}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
                 {data[1].TotalMark} <span className="text-sm">({data[1].totalExam})</span>
@@ -85,7 +85,7 @@ if(data.length==0){
               alt=""
             />
             <h1 className="text-white text-center font-normal text-lg mt-2">
-              {data[0].student.name}
+              {data[0].student.name.split(" ")[0]}
             </h1>
             <h1 className=" text-center text-3xl text-white font-bold italic  mt-1 ">
               {data[0].TotalMark} <span className="text-sm">({data[0].totalExam})</span>
@@ -106,7 +106,7 @@ if(data.length==0){
                 alt=""
               />
               <h1 className="text-white text-center font-normal text-lg mt-2">
-                {data[2].student.name}
+                {data[2].student.name.split(" ")[0]}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
                 {data[2].TotalMark} <span className="text-sm">({data[2].totalExam})</span>
@@ -128,8 +128,8 @@ if(data.length==0){
                 src={item.student.image}
                 alt=""
               />
-              <span className="text-base font-medium  text-white min-w-[60%]">
-                {item.student.name}
+              <span className="text-base font-medium  text-white min-w-[40%]">
+                {item.student.name.split(" ")[0]}
               </span>
               <span className="text-xl font-bold italic text-white">
                 {item.TotalMark} <span className="text-sm">({item.totalExam})</span>
