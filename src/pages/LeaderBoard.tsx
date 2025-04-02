@@ -27,7 +27,17 @@ const LeaderBoard = () => {
   });
 
   if (data === undefined) data = loaderData as tRank[];
-console.log(data)
+
+
+
+if(data.length==0){
+  return <div><h1>No one still participate any exam.</h1></div>
+}
+
+
+
+
+
   return (
     <div>
       {/* top 3 rank photos. */}
@@ -40,24 +50,26 @@ console.log(data)
 
         <div className="mt-[190px] flex justify-center scale-95 gap-5">
           {/* 2 */}
-          <div className="flex flex-col justify-center items-center relative">
-            <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
-              <span className="text-white font-semibold italic text-2xl">
-                #2
-              </span>
+          {data.length <= 2 && (
+            <div className="flex flex-col justify-center items-center relative">
+              <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
+                <span className="text-white font-semibold italic text-2xl">
+                  #2
+                </span>
+              </div>
+              <img
+                className="w-[80px] h-[80px] border-2 border-white object-cover rounded-full"
+                src={data[1].student.image}
+                alt=""
+              />
+              <h1 className="text-white text-center font-normal text-lg mt-2">
+                {data[1].student.name}
+              </h1>
+              <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
+                {data[1].TotalMark}
+              </h1>
             </div>
-            <img
-              className="w-[80px] h-[80px] border-2 border-white object-cover rounded-full"
-              src={data[1].student.image}
-              alt=""
-            />
-            <h1 className="text-white text-center font-normal text-lg mt-2">
-              {data[1].student.name}
-            </h1>
-            <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-              {data[1].TotalMark}
-            </h1>
-          </div>
+          )}
 
           {/* 1 */}
           <div className="flex flex-col bottom-[80px] justify-center items-center relative">
@@ -81,50 +93,51 @@ console.log(data)
           </div>
 
           {/* 3 */}
-          <div className="flex flex-col justify-center items-center relative">
-            <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
-              <span className="text-white font-semibold italic text-2xl">
-                #3
-              </span>
+          {data.length >= 3 && (
+            <div className="flex flex-col justify-center items-center relative">
+              <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
+                <span className="text-white font-semibold italic text-2xl">
+                  #3
+                </span>
+              </div>
+              <img
+                className="w-[80px] h-[80px] border-2 border-white object-cover rounded-full"
+                src={data[2].student.image}
+                alt=""
+              />
+              <h1 className="text-white text-center font-normal text-lg mt-2">
+                {data[2].student.name}
+              </h1>
+              <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
+                {data[2].TotalMark}
+              </h1>
             </div>
-            <img
-              className="w-[80px] h-[80px] border-2 border-white object-cover rounded-full"
-              src={data[2].student.image}
-              alt=""
-            />
-            <h1 className="text-white text-center font-normal text-lg mt-2">
-              {data[2].student.name}
-            </h1>
-            <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-              {data[2].TotalMark}
-            </h1>
-          </div>
+          )}
         </div>
-
-
-
-
-
-
-
       </div>
 
-
-<div className="flex flex-col gap-4 mt-4 px-2">
-    {data.slice(3)?.map((item,idx)=>{
-        return <div className="px-3 py-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex justify-between items-center">
-            <span className="text-xl font-bold italic text-white">#{idx+4}</span>
-            <img className="w-[50px] h-[50px] border border-white rounded-full object-cover" src={item.student.image} alt="" />
-            <span className="text-base font-medium  text-white min-w-[60%]">{item.student.name}</span>
-            <span className="text-xl font-bold italic text-white">{item.TotalMark}</span>
-        </div>
-    })}
-</div>
-
-
-
-
-
+      <div className="flex flex-col gap-4 mt-4 px-2">
+        {data.slice(3)?.map((item, idx) => {
+          return (
+            <div className="px-3 py-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex justify-between items-center">
+              <span className="text-xl font-bold italic text-white">
+                #{idx + 4}
+              </span>
+              <img
+                className="w-[50px] h-[50px] border border-white rounded-full object-cover"
+                src={item.student.image}
+                alt=""
+              />
+              <span className="text-base font-medium  text-white min-w-[60%]">
+                {item.student.name}
+              </span>
+              <span className="text-xl font-bold italic text-white">
+                {item.TotalMark}
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
