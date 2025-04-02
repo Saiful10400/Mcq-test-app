@@ -128,7 +128,7 @@ if(data.length==0){
                 src={item.student.image}
                 alt=""
               />
-              <span className="text-base font-medium  text-white min-w-[40%]">
+              <span className="text-base font-medium  text-white min-w-[40%] text-center">
                 {item.student.name.split(" ")[0]}
               </span>
               <span className="text-xl font-bold italic text-white">
