@@ -66,7 +66,7 @@ if(data.length==0){
                 {data[1].student.name}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-                {data[1].TotalMark}
+                {data[1].TotalMark} <span className="text-sm">({data[1].totalExam})</span>
               </h1>
             </div>
           )}
@@ -88,7 +88,7 @@ if(data.length==0){
               {data[0].student.name}
             </h1>
             <h1 className=" text-center text-3xl text-white font-bold italic  mt-1 ">
-              {data[0].TotalMark}
+              {data[0].TotalMark} <span className="text-sm">({data[0].totalExam})</span>
             </h1>
           </div>
 
@@ -109,7 +109,7 @@ if(data.length==0){
                 {data[2].student.name}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-                {data[2].TotalMark}
+                {data[2].TotalMark} <span className="text-sm">({data[2].totalExam})</span>
               </h1>
             </div>
           )}
@@ -132,7 +132,7 @@ if(data.length==0){
                 {item.student.name}
               </span>
               <span className="text-xl font-bold italic text-white">
-                {item.TotalMark}
+                {item.TotalMark} <span className="text-sm">({item.totalExam})</span>
               </span>
             </div>
           );
