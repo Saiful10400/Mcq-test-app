@@ -90,26 +90,26 @@ const Question = () => {
       <form onSubmit={formHandle}>
         <h1 className="text-2xl">Create a Question</h1>
         <div className="mt-2 ml-3 px-3 flex flex-col gap-1">
-          <input
+          <input required
             name="name"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="Question papper Name"
           />
-          <input
+          <input required
             name="class"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="number"
             placeholder="For which Class?"
           />
-          <input
+          <input required
             name="subject"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="From which subject"
           />
           <h1 className="font-semibold text-red-600">{errors}</h1>
-          <textarea 
+          <textarea  required
             onChange={textareaOnChangeHandle}
             className={
               valid === "valid"

@@ -22,7 +22,11 @@ const routes = createBrowserRouter([
         }
       },
       { path: "/leader-board",
-       element: <LeaderBoard />
+       element: <LeaderBoard />,
+       loader:async()=>{
+        const data=await axios.get(`https://mcq-test-server.vercel.app/api/result/leader-board-rank`)
+        return data?.data?.data
+      }
       },
       {
         path: "/student",

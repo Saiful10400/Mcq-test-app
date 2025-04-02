@@ -56,6 +56,7 @@ const Nav = () => {
     if (timeLeft === null) return;
 
     if (timeLeft <= 0) {
+      console.log("you are right.");
       context?.setExam((p) => ({ ...p, timeOut: true }));
       return;
     }
@@ -65,23 +66,25 @@ const Nav = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft,context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft]);
 
   // ui.
 
   if (context?.exam.start) {
     return (
-      <div className="bg-white rounded-t-xl flex justify-between px-3 items-end  pt-3 fixed bottom-0 left-0 w-full">
-        <h1 className="text-base font-semibold">
-          Time remaining: <span>{timeFormate(timeLeft as number)}</span>
+      <div className="bg-gray-500 border border-black text-white rounded-t-xl py-2 flex justify-between px-3 items-end  pt-3 fixed bottom-0 left-0 w-full">
+        <h1 className="text-base font-medium">
+          সময় বাকি: <span className="px-2 text-xl font-bold">{timeFormate(timeLeft as number)}</span> মিনিট
         </h1>
-        <h1 className="text-base font-semibold">
-          Question remaining:{" "}
-          <span>
+        <h1 className="text-base font-medium">
+          প্রশ্ন বাকি:{" "}
+          <span className="px-2 text-xl font-bold ">
             {context?.exam?.totalQuestion
               ? context?.exam?.totalQuestion - context.exam?.selectedAns?.length
               : 0}
           </span>
+          টি
         </h1>
       </div>
     );
@@ -90,7 +93,7 @@ const Nav = () => {
   //
 
   return (
-    <div className="bg-white rounded-t-xl flex justify-evenly items-end  pt-3 ">
+    <div className="bg-gray-200 rounded-t-xl flex justify-evenly items-end  pt-3  w-full">
       {/* show only this route to the student. */}
       <NavLink
         className={`${({ isActive }: { isActive: boolean }) =>

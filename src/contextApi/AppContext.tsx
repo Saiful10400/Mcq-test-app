@@ -8,15 +8,17 @@ export type tStarExamContext={
     selectedAns:{ index: number; ans: string }[],
     examSlug:string|null;
     timeOut:boolean;
+    isSubmited:boolean;
    
 }
 const AppContext = ({ children }: { children: React.ReactNode }) => {
 
 // exam starting.
-const[exam,setExam]=useState<tStarExamContext>({start:false,examDuration:null,selectedAns:[],totalQuestion:null,examSlug:null,timeOut:false})
+const[exam,setExam]=useState<tStarExamContext>({isSubmited:false,start:false,examDuration:null,selectedAns:[],totalQuestion:null,examSlug:null,timeOut:false})
 
 // submit exam papper.
 const examSubmitHandle=()=>{
+  setExam(p=>({...p,isSubmited:true}))
 axios.post("https://mcq-test-server.vercel.app/api/result/create",{examSlug:exam.examSlug,selectedAns:exam.selectedAns})
 .then(res=>{
   if(res.data?.statusCode===200){

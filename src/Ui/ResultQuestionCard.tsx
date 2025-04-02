@@ -56,7 +56,7 @@ const ResultQuestionCard = ({
       </div>
 
 <div className="mt-5 bg-white rounded-md p-1">
-    <h1 className="font-semibold text-lg mb-1 text-[#f66b30]">explanation:</h1>
+    <h1 className="font-medium text-lg mb-1 text-[#f66b30]">ব্যাখ্যা:</h1>
     <p>{question.explanation}</p>
 </div>
 

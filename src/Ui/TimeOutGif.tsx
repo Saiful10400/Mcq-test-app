@@ -4,14 +4,19 @@ import { appContext } from "../contextApi/context";
 
 const TimeOutGif = () => {
   const context = useContext(appContext);
+
+
+
   useEffect(() => {
-
-    if(!context?.examSubmitHandle) return
-
+ 
+  
+ if(!context?.exam.timeOut || !context?.examSubmitHandle) return
     const timeout = setTimeout(() => {
       context?.examSubmitHandle();
+      
     }, 4000);
     return () => clearTimeout(timeout);
+
   }, [context]);
 
   return (

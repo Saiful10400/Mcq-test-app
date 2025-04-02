@@ -42,17 +42,17 @@ axios.post("https://mcq-test-server.vercel.app/api/auth/create-student",{name,cl
       <form onSubmit={formHandle}>
         <h1 className="text-2xl">Create a Student</h1>
         <div className="mt-2 ml-3 px-3 flex flex-col gap-1">
-          <input name="name"
+          <input required name="name"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="Student Name"
           />
-          <input name="class"
+          <input required name="class"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="Student className"
           />
-          <select defaultValue={"female"} name="gender" className="w-full border-black border text-lg py-1 pl-2 rounded-md">
+          <select required defaultValue={"female"} name="gender" className="w-full border-black border text-lg py-1 pl-2 rounded-md">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>

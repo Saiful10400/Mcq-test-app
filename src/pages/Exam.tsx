@@ -72,13 +72,13 @@ const Exam = () => {
       <form onSubmit={formHandle}>
         <h1 className="text-2xl">Create a Exam</h1>
         <div className="mt-2 ml-3 px-3 flex flex-col gap-1">
-          <input
+          <input required
             name="time"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="number"
             placeholder="Time"
           />
-          <select
+          <select required
             defaultValue={""}
             name="student"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
@@ -93,7 +93,7 @@ const Exam = () => {
               </option>
             ))}
           </select>
-          <select
+          <select required
             defaultValue={""}
             name="questionPapper"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
@@ -136,6 +136,7 @@ const Exam = () => {
               const linkCopyHandle = async () => {
                 try {
                   await navigator.clipboard.writeText(
+                    // `http://localhost:5173/${item.slug}`
                     `https://saiful-10400-mcq-test-app.vercel.app/${item.slug}`
                   );
                   alert("Link copyed");
