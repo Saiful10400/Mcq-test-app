@@ -9,7 +9,7 @@ export type tSingleQuestion = {
     question: string;
     options: string[];
     correctAns: string;
-    explaination?: string; // Optional field
+    explanation?: string; // Optional field
   };
   
  export type tQuestion = {
@@ -39,7 +39,7 @@ const Question = () => {
       question: z.string().min(1, "Question is required"), // Ensure non-empty question
       options: z.array(z.string()).length(4, "Exactly 4 options are required"), // Ensure 4 options
       correctAns: z.string().min(1, "Correct answer is required"), // Ensure correct answer exists
-      explaination: z.string().optional(), // Make explanation optional
+      explanation: z.string().optional(), // Make explanation optional
     })
   );
 
