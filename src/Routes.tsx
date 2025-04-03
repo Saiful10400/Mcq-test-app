@@ -7,6 +7,7 @@ import Question from "./pages/Question";
 import Exam from "./pages/Exam";
 import ExamStarter from "./pages/ExamStarter";
 import axios from "axios";
+import AstudentAllExam from "./pages/AstudentAllExam";
 
 const routes = createBrowserRouter([
   {
@@ -16,17 +17,32 @@ const routes = createBrowserRouter([
       {
         path: "/:slug",
         element: <ExamStarter />,
-        loader:async({params})=>{
-          const data=await axios.get(`https://mcq-test-server.vercel.app/api/exam/${params.slug}`)
-          return data?.data?.data
-        }
+        loader: async ({ params }) => {
+          const data = await axios.get(
+            `https://mcq-test-server.vercel.app/api/exam/${params.slug}`
+          );
+          return data?.data?.data;
+        },
       },
-      { path: "/leader-board",
-       element: <LeaderBoard />,
-       loader:async()=>{
-        const data=await axios.get(`https://mcq-test-server.vercel.app/api/result/leader-board-rank`)
-        return data?.data?.data
-      }
+      {
+        path: "/leader-board",
+        element: <LeaderBoard />,
+        loader: async () => {
+          const data = await axios.get(
+            `https://mcq-test-server.vercel.app/api/result/leader-board-rank`
+          );
+          return data?.data?.data;
+        },
+      },
+      {
+        path: "/student/exam/:id",
+        element: <AstudentAllExam />,
+        loader: async ({ params }) => {
+          const data = await axios.get(
+            `https://mcq-test-server.vercel.app/api/result/aStudentAllResult/${params.id}`
+          );
+          return data?.data?.data;
+        },
       },
       {
         path: "/student",
@@ -39,8 +55,7 @@ const routes = createBrowserRouter([
       {
         path: "/exam",
         element: <Exam />,
-      }
-      
+      },
     ],
   },
   {

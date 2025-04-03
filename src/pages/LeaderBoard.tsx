@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import crownImg from "../assets/crown.png";
 type Student = {
   _id: string;
@@ -28,15 +28,13 @@ const LeaderBoard = () => {
 
   if (data === undefined) data = loaderData as tRank[];
 
-
-
-if(data.length==0){
-  return <div><h1>No one still participate any exam.</h1></div>
-}
-
-
- 
-
+  if (data.length == 0) {
+    return (
+      <div>
+        <h1>No one still participate any exam.</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -51,7 +49,10 @@ if(data.length==0){
         <div className="mt-[190px] flex justify-center scale-95 gap-5">
           {/* 2 */}
           {data.length >= 2 && (
-            <div className="flex flex-col justify-center items-center relative">
+            <Link
+              to={`/student/exam/${data[1].student._id}`}
+              className="flex flex-col justify-center items-center relative"
+            >
               <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
                 <span className="text-white font-semibold italic text-2xl">
                   #2
@@ -66,13 +67,17 @@ if(data.length==0){
                 {data[1].student.name.split(" ")[0]}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-                {data[1].TotalMark} <span className="text-sm">({data[1].totalExam})</span>
+                {data[1].TotalMark}{" "}
+                <span className="text-sm">({data[1].totalExam})</span>
               </h1>
-            </div>
+            </Link>
           )}
 
           {/* 1 */}
-          <div className="flex flex-col bottom-[80px] justify-center items-center relative">
+          <Link
+            to={`/student/exam/${data[0].student._id}`}
+            className="flex flex-col bottom-[80px] justify-center items-center relative"
+          >
             <div className=" absolute  -top-[110px] flex flex-col justify-center items-center">
               <span className="text-white font-semibold italic text-2xl">
                 #1
@@ -88,13 +93,17 @@ if(data.length==0){
               {data[0].student.name.split(" ")[0]}
             </h1>
             <h1 className=" text-center text-3xl text-white font-bold italic  mt-1 ">
-              {data[0].TotalMark} <span className="text-sm">({data[0].totalExam})</span>
+              {data[0].TotalMark}{" "}
+              <span className="text-sm">({data[0].totalExam})</span>
             </h1>
-          </div>
+          </Link>
 
           {/* 3 */}
           {data.length >= 3 && (
-            <div className="flex flex-col justify-center items-center relative">
+            <Link
+              to={`/student/exam/${data[2].student._id}`}
+              className="flex flex-col justify-center items-center relative"
+            >
               <div className=" absolute -top-[10px] flex flex-col justify-center items-center">
                 <span className="text-white font-semibold italic text-2xl">
                   #3
@@ -109,9 +118,10 @@ if(data.length==0){
                 {data[2].student.name.split(" ")[0]}
               </h1>
               <h1 className=" text-center text-2xl text-white font-bold italic  mt-1 ">
-                {data[2].TotalMark} <span className="text-sm">({data[2].totalExam})</span>
+                {data[2].TotalMark}{" "}
+                <span className="text-sm">({data[2].totalExam})</span>
               </h1>
-            </div>
+            </Link>
           )}
         </div>
       </div>
@@ -119,7 +129,10 @@ if(data.length==0){
       <div className="flex flex-col gap-4 mt-4 px-2">
         {data.slice(3)?.map((item, idx) => {
           return (
-            <div className="px-3 py-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex justify-between items-center">
+            <Link
+              to={`/student/exam/${item.student._id}`}
+              className="px-3 py-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg flex justify-between items-center"
+            >
               <span className="text-xl font-bold italic text-white">
                 #{idx + 4}
               </span>
@@ -132,9 +145,10 @@ if(data.length==0){
                 {item.student.name.split(" ")[0]}
               </span>
               <span className="text-xl font-bold italic text-white">
-                {item.TotalMark} <span className="text-sm">({item.totalExam})</span>
+                {item.TotalMark}{" "}
+                <span className="text-sm">({item.totalExam})</span>
               </span>
-            </div>
+            </Link>
           );
         })}
       </div>
