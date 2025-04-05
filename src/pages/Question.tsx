@@ -1,39 +1,39 @@
-import   { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Button from "../Ui/Button";
 import axios from "axios";
 import * as z from "zod";
 
-
 export type tSingleQuestion = {
-    _id: string;
-    question: string;
-    options: string[];
-    correctAns: string;
-    explanation?: string; // Optional field
-  };
-  
- export type tQuestion = {
-    _id: string;
-    name: string;
-    class: number;
-    subject: string;
-    questions: tSingleQuestion[];
-    createdAt: string; // ISO Date string
-    updatedAt: string; // ISO Date string
-    __v: number;
-  };
-  
- 
+  _id: string;
+  question: string;
+  options: string[];
+  correctAns: string;
+  explanation?: string; // Optional field
+};
+
+export type tQuestion = {
+  _id: string;
+  name: string;
+  class: number;
+  subject: string;
+  questions: tSingleQuestion[];
+  createdAt: string; // ISO Date string
+  updatedAt: string; // ISO Date string
+  __v: number;
+};
+
 const Question = () => {
   const [allQuestion, setAllQuestion] = useState<tQuestion[]>([]);
   const [refetch, setRefetch] = useState<boolean>(false);
- 
+
   useEffect(() => {
     axios
-      .get("https://mcq-test-server.vercel.app/api/question-papper/all-questionPappers")
+      .get(
+        "https://mcq-test-server.vercel.app/api/question-papper/all-questionPappers"
+      )
       .then((res) => setAllQuestion(res.data?.data));
   }, [refetch]);
- 
+
   const schema = z.array(
     z.object({
       question: z.string().min(1, "Question is required"), // Ensure non-empty question
@@ -67,16 +67,22 @@ const Question = () => {
     const form = e.target as HTMLFormElement; // Explicitly cast to HTMLFormElement
     const name = (form.elements.namedItem("name") as HTMLInputElement)?.value;
     const Class = (form.elements.namedItem("class") as HTMLInputElement)?.value;
-    const subject = (form.elements.namedItem("subject") as HTMLInputElement)?.value;
-     const questions=JSON.parse((form.elements.namedItem("questions") as HTMLInputElement)?.value)
+    const subject = (form.elements.namedItem("subject") as HTMLInputElement)
+      ?.value;
+    const questions = JSON.parse(
+      (form.elements.namedItem("questions") as HTMLInputElement)?.value
+    );
 
     axios
-      .post("https://mcq-test-server.vercel.app/api/question-papper/create-one", {
-        name,
-        class: Number(Class),
-        subject,
-        questions
-      })
+      .post(
+        "https://mcq-test-server.vercel.app/api/question-papper/create-one",
+        {
+          name,
+          class: Number(Class),
+          subject,
+          questions,
+        }
+      )
       .then((res) => {
         if (res.data?.statusCode === 200) {
           alert("New Question created.");
@@ -90,26 +96,30 @@ const Question = () => {
       <form onSubmit={formHandle}>
         <h1 className="text-2xl">Create a Question</h1>
         <div className="mt-2 ml-3 px-3 flex flex-col gap-1">
-          <input required
+          <input
+            required
             name="name"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="Question papper Name"
           />
-          <input required
+          <input
+            required
             name="class"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="number"
             placeholder="For which Class?"
           />
-          <input required
+          <input
+            required
             name="subject"
             className="w-full border-black border text-lg py-1 pl-2 rounded-md"
             type="text"
             placeholder="From which subject"
           />
           <h1 className="font-semibold text-red-600">{errors}</h1>
-          <textarea  required
+          <textarea
+            required
             onChange={textareaOnChangeHandle}
             className={
               valid === "valid"
@@ -126,31 +136,34 @@ const Question = () => {
       </form>
 
       <h1 className="text-2xl mt-5">All Questions</h1>
-
-      <table className="w-full border-collapse border border-gray-300 mt-3">
-        <thead>
-          <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-            <th className="py-3 px-6 text-left border">Name</th>
-            <th className="py-3 px-6 text-left border">Class</th>
-            <th className="py-3 px-6 text-center border">Subject</th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-600 text-sm font-light">
-          {allQuestion?.map((item: tQuestion) => {
-            return (
-              <tr key={item._id} className="border-b hover:bg-gray-100">
-                <td className="py-3 px-6 text-left border">{item.name}</td>
-                <td className="py-3 px-6 text-left border">{item.class}</td>
-                <td className="py-3 px-6 text-center border">
-                  <span className="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">
-                    {item.subject}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="w-full overflow-auto">
+        <table className="w-full border-collapse border border-gray-300 mt-3">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <th className="py-3 px-6 text-left border">Name</th>
+              <th className="py-3 px-6 text-left border">Class</th>
+              <th className="py-3 px-6 text-center border">Subject</th>
+              <th className="py-3 px-6 text-center border">Total question</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light">
+            {allQuestion?.map((item: tQuestion) => {
+              return (
+                <tr key={item._id} className="border-b hover:bg-gray-100">
+                  <td className="py-3 px-6 text-left border">{item.name}</td>
+                  <td className="py-3 px-6 text-left border">{item.class}</td>
+                  <td className="py-3 text-center border">
+                    <span className="bg-green-200 text-green-700 py-1 px-2 rounded-full text-xs">
+                      {item.subject}
+                    </span>
+                  </td>
+                  <td className="py-3 px-6 text-left border">{item.questions.length}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

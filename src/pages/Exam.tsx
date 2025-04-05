@@ -18,6 +18,7 @@ export type tStudent = {
 export type tExam = {
   slug: string;
   hasTaken: boolean;
+  isLinkVisited: boolean;
   student: tStudent;
   questionPapper: tQuestion;
   result: string;
@@ -148,8 +149,8 @@ const Exam = () => {
               return (
                 <tr key={item.slug} className="border-b hover:bg-gray-100">
                   <td className="py-3 px-6 text-left border">
-                    <button onClick={linkCopyHandle}>
-                      <Link2 />
+                    <button className={item.isLinkVisited?`text-white bg-green-500 shadow-lg border-green-500 border-2 p-1 rounded-md`:""} onClick={linkCopyHandle}>
+                      <Link2  />
                     </button>
                   </td>
                   <td className="py-3 px-6 text-left border">
@@ -173,9 +174,9 @@ const Exam = () => {
                   <td className="py-3 px-6 text-left border">
                     {item?.time} minuts
                   </td>
-                  <td className="py-3 px-6 text-center border">
-                    <span className="bg-green-200 text-green-700 py-1 px-3 text-xs">
-                      {item.result}
+                  <td className="py-3  text-center border">
+                    <span className={(item.result==="exam not conducted."?"bg-red-200 text-red-700":"bg-green-200 rounded-md text-green-700")+" py-1 p-2 rounded-sm text-xs"}>
+                      {item.result==="exam not conducted."?"haven't appear":item.result}
                     </span>
                   </td>
                 </tr>
