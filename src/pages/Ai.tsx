@@ -104,7 +104,7 @@ const Ai = () => {
           placeholder="তোমার প্রশ্নটা লিখো এখানে…"
           style={{ height: textAreaheight + "px" }}
           onInput={inputFieldHandle}
-          className="w-full rounded-md border border-[#f66b30] pl-1 pt-1"
+          className="w-full rounded-md border border-[#f66b30] pl-1 pt-1 focus:outline-none"
         ></textarea>
         <button type="submit" onClick={promptSubmitHandle}>
           <Send className="text-[#f66b30]" />
