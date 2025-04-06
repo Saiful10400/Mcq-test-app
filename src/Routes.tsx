@@ -8,6 +8,7 @@ import Exam from "./pages/Exam";
 import ExamStarter from "./pages/ExamStarter";
 import axios from "axios";
 import AstudentAllExam from "./pages/AstudentAllExam";
+import Ai from "./pages/Ai";
 
 const routes = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const routes = createBrowserRouter([
       {
         path: "/student",
         element: <Student />,
+      },
+      {
+        path: "/ai",
+        element: <Ai />,
       },
       {
         path: "/question",

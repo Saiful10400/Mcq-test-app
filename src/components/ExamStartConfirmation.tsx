@@ -14,6 +14,7 @@ const ExamStartConfirmation = ({ data }: { data: tExam | null }) => {
 
   useEffect(() => {
     if (!isTeacher && data) {
+      console.log("fired put api for update.")
       axios.put(`https://mcq-test-server.vercel.app/api/exam/${data.slug}`);
     }
   }, [isTeacher, data]);

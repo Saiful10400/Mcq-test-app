@@ -1,9 +1,10 @@
-import { FlaskConical, ScrollText, Trophy, User } from "lucide-react";
+import { BotIcon, FlaskConical, ScrollText, Trophy, User } from "lucide-react";
 import { NavLink } from "react-router";
 import "./index.css";
 import { useContext, useEffect, useState } from "react";
 import { appContext } from "../contextApi/context";
 import timeFormate from "../utils/timeFormate";
+ 
 
 const Nav = () => {
   const teacherRoutes = (
@@ -99,6 +100,16 @@ const Nav = () => {
   return (
     <div className="bg-gray-200 rounded-t-xl flex justify-evenly items-end  pt-3  w-full">
       {/* show only this route to the student. */}
+      <NavLink
+        className={`${({ isActive }: { isActive: boolean }) =>
+          isActive ? "active" : ""} flex items-center flex-col `}
+        to={"/ai"}
+      >
+        <div className="icon border p-2 rounded-full">
+          <BotIcon height={22} width={22} />
+        </div>
+        <span className="text-sm font-thin">ম্যাজিক</span>
+      </NavLink>
       <NavLink
         className={`${({ isActive }: { isActive: boolean }) =>
           isActive ? "active" : ""} flex items-center flex-col `}
