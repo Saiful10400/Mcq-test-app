@@ -53,13 +53,11 @@ const Ai = () => {
     });
   }, [chat]);
 
- 
-
   return (
     <div className="min-h-[70vh] pb-28">
       {chat.length === 0 ? (
-        <div className="flex justify-center items-center flex-col">
-          <img className="w-[300px] " src={robotGif} alt="" />
+        <div className="flex justify-center items-center flex-col  mt-24">
+          <img className="w-[250px] " src={robotGif} alt="" />
           <h1 className="w-[85vw] text-center mx-auto font-medium text-gray-500">
             আমি পিকু। যেকোনো জিজ্ঞাসায় আমি তোমার পাশে আছি!
           </h1>
